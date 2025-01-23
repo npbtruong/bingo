@@ -59,14 +59,14 @@
         
         function generateNumber() {
             // Check if all numbers have been called
-            if (calledNumbers.length >= 100) {
+            if (calledNumbers.length >= 90) {
                 alert('All numbers have been called!');
                 return;
             }
             
             let newNumber;
             do {
-                newNumber = Math.floor(Math.random() * 100) + 1;
+                newNumber = Math.floor(Math.random() * 90) + 1;
             } while (calledNumbers.includes(newNumber));
             
             calledNumbers.push(newNumber);
