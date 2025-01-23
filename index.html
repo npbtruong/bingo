@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bingo Number Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        #number {
+            font-size: 72px;
+            color: #333;
+            margin: 20px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #calledNumbers {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bingo Number Generator</h1>
+        <div id="number">--</div>
+        <button onclick="generateNumber()">Generate Number</button>
+        <button onclick="resetGame()">Reset Game</button>
+        <div id="calledNumbers"></div>
+    </div>
+
+    <script>
+        let calledNumbers = [];
+        
+        function generateNumber() {
+            // Check if all numbers have been called
+            if (calledNumbers.length >= 100) {
+                alert('All numbers have been called!');
+                return;
+            }
+            
+            let newNumber;
+            do {
+                newNumber = Math.floor(Math.random() * 100) + 1;
+            } while (calledNumbers.includes(newNumber));
+            
+            calledNumbers.push(newNumber);
+            
+            // Display the new number
+            document.getElementById('number').textContent = newNumber;
+            
+            // Update called numbers list
+            updateCalledNumbersList();
+        }
+        
+        function resetGame() {
+            calledNumbers = [];
+            document.getElementById('number').textContent = '--';
+            document.getElementById('calledNumbers').textContent = '';
+        }
+        
+        function updateCalledNumbersList() {
+            const sortedNumbers = calledNumbers.sort((a, b) => a - b);
+            document.getElementById('calledNumbers').textContent = 
+                'Called Numbers: ' + sortedNumbers.join(', ');
+        }
+    </script>
+</body>
+</html>
